@@ -16,7 +16,7 @@ import { CalendarComponent } from './calendar';
 import { ChatComponent } from './chat';
 import { MailboxComponent } from './mailbox';
 import { InvoiceListComponent } from './invoice/list';
-import { CRMComponent } from './crm/crm.component';
+import { CRMComponent } from './crm.component';
 
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, data: { title: 'Chat' } },
@@ -33,7 +33,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes), CommonModule, SharedModule.forRoot()],
+    imports: [RouterModule.forChild(routes), CommonModule, SharedModule.forRoot() ],
     declarations: [
         ChatComponent,
         ScrumboardComponent,

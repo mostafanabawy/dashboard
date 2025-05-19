@@ -28,7 +28,7 @@ import { AuthLayout } from './layouts/auth-layout';
 // pages
 import { KnowledgeBaseComponent } from './pages/knowledge-base';
 import { FaqComponent } from './pages/faq';
-import { CRMComponent } from './apps/crm/crm.component';
+import { CRMComponent } from './apps/crm.component';
 
 export const routes: Routes = [
     {
