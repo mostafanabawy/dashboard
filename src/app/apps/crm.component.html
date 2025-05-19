@@ -26,10 +26,13 @@
                         enter a number made from 11 digits.</p>
                 </ng-container>
             </div>
-            <div>
+            <div [ngClass]="isSubmitForm && userForm.controls['whatsAppNumber'].dirty ? (userForm.controls['whatsAppNumber'].errors ? 'has-error' : 'has-success') : ''">
                 <label for="whatsAppNumber">WhatsApp Number</label>
                 <input id="whatsAppNumber" name="whatsAppNumber" type="text" placeholder="WhatsApp Number"
                     class="form-input" formControlName="whatsAppNumber">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['whatsAppNumber'].errors">
+                    <p class="mt-1 text-danger">Please enter a number made from 11 digits.</p>
+                </ng-container>
             </div>
             <div [ngClass]="isSubmitForm ? userForm.controls['typeOfCall'].errors ? 'has-error' : 'has-success' : ''">
                 <label for="typeOfCall">Type of Call <span class="font-bold text-red-500">*</span></label>
@@ -137,7 +140,8 @@
                     <option value="Computing and Data Science">Computing and Data Science</option>
                     <option value="School of Physical Therapy">School of Physical Therapy</option>
                     <option value="Dentistry">Dentistry</option>
-                    <option value="Business Administration and Applied Economics">Business Administration and Applied Economics</option>
+                    <option value="Business Administration and Applied Economics">Business Administration and Applied
+                        Economics</option>
                     <option value="Jobs">Jobs</option>
                     <option value="Suppliers">Suppliers</option>
                     <option value="Other">Other</option>
@@ -200,4 +204,6 @@
         </div>
         <button type="submit" class="btn btn-primary ms-auto !mt-6">Save</button>
     </form>
+
+    <app-history-tabs></app-history-tabs>
 </section>

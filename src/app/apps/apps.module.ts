@@ -9,14 +9,12 @@ import { ScrumboardComponent } from './scrumboard';
 import { ContactsComponent } from './contacts';
 import { NotesComponent } from './notes';
 import { TodolistComponent } from './todolist';
-import { InvoicePreviewComponent } from './invoice/preview';
-import { InvoiceAddComponent } from './invoice/add';
-import { InvoiceEditComponent } from './invoice/edit';
 import { CalendarComponent } from './calendar';
 import { ChatComponent } from './chat';
 import { MailboxComponent } from './mailbox';
-import { InvoiceListComponent } from './invoice/list';
 import { CRMComponent } from './crm.component';
+import { HistoryTabsComponent } from './history-tabs/history-tabs.component';
+import { HistoryTablesComponent } from './history-tables/history-tables.component';
 
 const routes: Routes = [
     { path: 'apps/chat', component: ChatComponent, data: { title: 'Chat' } },
@@ -25,10 +23,6 @@ const routes: Routes = [
     { path: 'apps/contacts', component: ContactsComponent, data: { title: 'Contacts' } },
     { path: 'apps/notes', component: NotesComponent, data: { title: 'Notes' } },
     { path: 'apps/todolist', component: TodolistComponent, data: { title: 'Todolist' } },
-    { path: 'apps/invoice/list', component: InvoiceListComponent, data: { title: 'Invoice List' } },
-    { path: 'apps/invoice/preview', component: InvoicePreviewComponent, data: { title: 'Invoice Preview' } },
-    { path: 'apps/invoice/add', component: InvoiceAddComponent, data: { title: 'Invoice Add' } },
-    { path: 'apps/invoice/edit', component: InvoiceEditComponent, data: { title: 'Invoice Edit' } },
     { path: 'apps/calendar', component: CalendarComponent, data: { title: 'Calendar' } },
 ];
 
@@ -40,13 +34,11 @@ const routes: Routes = [
         ContactsComponent,
         NotesComponent,
         TodolistComponent,
-        InvoiceListComponent,
-        InvoicePreviewComponent,
-        InvoiceAddComponent,
-        InvoiceEditComponent,
         CalendarComponent,
         MailboxComponent,
-        CRMComponent
+        CRMComponent,
+        HistoryTabsComponent,
+        HistoryTablesComponent
     ],
 })
 export class AppsModule {}

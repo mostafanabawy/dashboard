@@ -36,11 +36,10 @@ export const routes: Routes = [
         component: AppLayout,
         children: [
             // dashboard
-            { path: '', component: IndexComponent, data: { title: 'Sales Admin' } },
+            { path: '', component: CRMComponent},
             { path: 'analytics', component: AnalyticsComponent, data: { title: 'Analytics Admin' } },
             { path: 'finance', component: FinanceComponent, data: { title: 'Finance Admin' } },
             { path: 'crypto', component: CryptoComponent, data: { title: 'Crypto Admin' } },
-            { path: 'crm', component: CRMComponent},
             
 
             // widgets
@@ -61,9 +60,6 @@ export const routes: Routes = [
 
             //apps
             { path: '', loadChildren: () => import('./apps/apps.module').then((d) => d.AppsModule) },
-
-            // components
-            { path: '', loadChildren: () => import('./components/components.module').then((d) => d.ComponentsModule) },
 
             // elements
             { path: '', loadChildren: () => import('./elements/elements.module').then((d) => d.ElementsModule) },

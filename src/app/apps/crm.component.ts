@@ -29,7 +29,7 @@ export class CRMComponent {
     this.userForm = this.fb.group({
       name: ['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/[0-9]{11}/)]],
-      whatsAppNumber: [''],
+      whatsAppNumber: ['', Validators.pattern(/[0-9]{11}/)],
       typeOfCall: ['', Validators.required],
       callStatus: ['', Validators.required],
       followUp: ['', Validators.required],
