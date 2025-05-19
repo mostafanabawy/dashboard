@@ -50,6 +50,8 @@ export class CRMComponent {
     if (this.userForm.valid) {
       //form validated success
       this.showMessage('Form submitted successfully.');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
   showMessage(msg = '', type = 'success') {
