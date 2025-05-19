@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 export class CRMComponent {
   userForm!: FormGroup;
   isSubmitForm = false;
-  codeArr: any = [];
   options = [
     'Schools',
     'Tuition Fees',
@@ -26,29 +25,22 @@ export class CRMComponent {
   constructor(public fb: FormBuilder) {
     this.initForm();
   }
-  toggleCode = (name: string) => {
-    if (this.codeArr.includes(name)) {
-      this.codeArr = this.codeArr.filter((d: string) => d != name);
-    } else {
-      this.codeArr.push(name);
-    }
-  };
   initForm() {
-    this.userForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', [Validators.required, Validators.pattern(/[0-9]{11}/)]),
-      whatsAppNumber: new FormControl(''),
-      typeOfCall: new FormControl('', Validators.required),
-      callStatus: new FormControl('', Validators.required),
-      followUp: new FormControl('', Validators.required),
-      callerType: new FormControl('', Validators.required),
-      city: new FormControl(''),
-      school: new FormControl(''),
-      percentage: new FormControl(''),
-      certificateType: new FormControl(''),
-      askedQuestions: new FormControl([], Validators.required),
-      answer: new FormControl('', Validators.required),
-      notes: new FormControl(''),
+    this.userForm = this.fb.group({
+      name: ['', Validators.required],
+      phoneNumber: ['', [Validators.required, Validators.pattern(/[0-9]{11}/)]],
+      whatsAppNumber: [''],
+      typeOfCall: ['', Validators.required],
+      callStatus: ['', Validators.required],
+      followUp: ['', Validators.required],
+      callerType: ['', Validators.required],
+      city: [''],
+      school: [''],
+      percentage: [''],
+      certificateType: [''],
+      askedQuestions: [[], Validators.required],
+      answer: ['', Validators.required],
+      notes: [''],
     });
   }
 
