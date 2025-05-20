@@ -124,5 +124,29 @@
     "coming_soon_boxed": "Coming Soon Boxed",
     "coming_soon_cover": "Coming Soon Cover",
     "contact_us_boxed": "Contact Us Boxed",
-    "contact_us_cover": "Contact Us Cover"
+    "contact_us_cover": "Contact Us Cover",
+    "table": {
+        "RecordId": "Record ID",
+        "CallerName": "Caller Name",
+        "PhoneNumber": "Phone Number",
+        "OtherNumber": "Other Number",
+        "CallerType": "Caller Type",
+        "TypeOfCall": "Type Of Call",
+        "Status": "Status",
+        "City": "City",
+        "SchoolName": "School Name",
+        "Percentage": "Percentage",
+        "CertificateType": "Certificate Type",
+        "Notes": "Notes",
+        "Date": "Date",
+        "Questions": "Questions",
+        "FollowUp": "Follow Up",
+        "Answer": "Answer"
+    },
+    "table2": {
+        "Question": "Question",
+        "Answer": "Answer",
+        "Notes": "Notes",
+        "Action": "Action"
+    }
 }

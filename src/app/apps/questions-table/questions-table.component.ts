@@ -1,4 +1,4 @@
-import { Component, effect, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, effect, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryService } from 'src/app/service/history.service';
@@ -11,7 +11,8 @@ export class QuestionsTableComponent {
   constructor(
     private tabsHisoryService: HistoryService,
     private fb: FormBuilder,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef
   ) {
     this.initForm();
     effect(() => {
@@ -28,6 +29,11 @@ export class QuestionsTableComponent {
       this.currentPage.set(res.result.PagingInfo[0].CurrentPage);
       console.log(res);
     });
+    this.translateCols();
+    this.translate.onLangChange.subscribe(event => {
+      console.log('Language changed to:', event.lang);
+      this.translateCols();
+    });
   }
   search = '';
   cols = [
@@ -37,12 +43,20 @@ export class QuestionsTableComponent {
     { field: 'action', title: 'Action', filter: false, headerClass: 'justify-center' }
   ];
   translateCols() {
-    this.cols = [
-      { field: 'Question', title: this.translate.instant('table.Question') },
-      { field: 'AnswerEN', title: this.translate.instant('table.Answer') },
-      { field: 'AnswerAR', title: this.translate.instant('table.Notes') },
-      { field: 'action', title: this.translate.instant('table.Action'), filter: false, headerClass: 'justify-center' }
-    ];
+    this.translate.get([
+      'table2.Question',
+      'table2.Answer',
+      'table2.Notes',
+      'table2.Action'
+    ]).subscribe(translations => {
+      this.cols = [
+        { field: 'Question', title: translations['table2.Question'] },
+        { field: 'AnswerEN', title: translations['table2.Answer'] },
+        { field: 'AnswerAR', title: translations['table2.Notes'] },
+        { field: 'action', title: translations['table2.Action'], filter: false, headerClass: 'justify-center' }
+      ];
+      this.cdr.detectChanges();
+    });
   }
 
   rows = signal<any>([])
@@ -75,7 +89,7 @@ export class QuestionsTableComponent {
       console.log(res);
     });
   }
-  onServerChange(data: any){
+  onServerChange(data: any) {
     console.log(data);
     this.currentPage.set(data.current_page)
     this.tabsHisoryService.fetchQuestions(data.current_page).subscribe((res: any) => {

@@ -158,6 +158,12 @@
         "FollowUp": "متابعة",
         "Answer": "الإجابة"
     },
+    "table2": {
+        "Question": "السؤال",
+        "Answer": "الإجابة",
+        "Notes": "ملاحظات",
+        "Action": "إجراء"
+    },
     "Questions": "الأسئلة",
     "History": "إدخالات سابقة",
     "All Questions": "جميع الأسئلة",
