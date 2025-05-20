@@ -10,9 +10,15 @@ export const initialState = {
     locale: 'en',
     sidebar: false,
     languageList: [
-        { code: 'zh', name: 'Chinese' },
-        { code: 'da', name: 'Danish' },
         { code: 'en', name: 'English' },
+        { code: 'ae', name: 'Arabic' },
+    ],
+    isShowMainLoader: true,
+    semidark: false,
+};
+/*  
+{ code: 'zh', name: 'Chinese' },
+        { code: 'da', name: 'Danish' },
         { code: 'fr', name: 'French' },
         { code: 'de', name: 'German' },
         { code: 'el', name: 'Greek' },
@@ -24,13 +30,7 @@ export const initialState = {
         { code: 'ru', name: 'Russian' },
         { code: 'es', name: 'Spanish' },
         { code: 'sv', name: 'Swedish' },
-        { code: 'tr', name: 'Turkish' },
-        { code: 'ae', name: 'Arabic' },
-    ],
-    isShowMainLoader: true,
-    semidark: false,
-};
-
+        { code: 'tr', name: 'Turkish' }, */
 export function indexReducer(state = initialState, action: any) {
     const type = action.type;
     let payload = action.payload;

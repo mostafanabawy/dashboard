@@ -1,57 +1,64 @@
 <section class="bg-white p-4 space-y-3 shadow-md rounded-md">
-    <h2 class="font-bold text-xl">Badya University</h2>
+    <h2 class="font-extrabold text-2xl text-[#2a3d67]">{{ "Badya University" | translate }}</h2>
     <form class="space-y-5" (ngSubmit)="onSubmit()" [formGroup]="userForm">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div [ngClass]="isSubmitForm ? userForm.controls['name'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="name">Name <span class="font-bold text-red-500">*</span></label>
-                <input id="name" name="name" type="text" placeholder="Name" class="form-input" formControlName="name">
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['name'].errors">
+            <div [ngClass]="isSubmitForm ? userForm.controls['CallerName'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="CallerName">{{ "Name" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <input id="CallerName" name="CallerName" type="text" placeholder="Name" class="form-input"
+                    formControlName="CallerName">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['CallerName'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['name'].errors">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['CallerName'].errors">
                     <p class="mt-1 text-danger">Name is required.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm ? userForm.controls['phoneNumber'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="phoneNumber">Phone number <span class="font-bold text-red-500">*</span></label>
-                <input id="phoneNumber" name="phoneNumber" type="tel" placeholder="Phone number" class="form-input"
-                    formControlName="phoneNumber">
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['phoneNumber'].errors">
+            <div [ngClass]="isSubmitForm ? userForm.controls['PhoneNumber'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="PhoneNumber">{{ "Phone number" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <input id="PhoneNumber" name="PhoneNumber" type="tel" placeholder="Phone number" class="form-input"
+                    formControlName="PhoneNumber">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['PhoneNumber'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['phoneNumber'].errors">
-                    <p class="mt-1 text-danger" *ngIf="userForm.controls['phoneNumber'].errors?.['required']">Phone
+                <ng-container *ngIf="isSubmitForm && userForm.controls['PhoneNumber'].errors">
+                    <p class="mt-1 text-danger" *ngIf="userForm.controls['PhoneNumber'].errors?.['required']">Phone
                         number is required.</p>
-                    <p class="mt-1 text-danger" *ngIf="userForm.controls['phoneNumber'].errors?.['pattern']">please
+                    <p class="mt-1 text-danger" *ngIf="userForm.controls['PhoneNumber'].errors?.['pattern']">please
                         enter a number made from 11 digits.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm && userForm.controls['whatsAppNumber'].dirty ? (userForm.controls['whatsAppNumber'].errors ? 'has-error' : 'has-success') : ''">
-                <label for="whatsAppNumber">WhatsApp Number</label>
-                <input id="whatsAppNumber" name="whatsAppNumber" type="text" placeholder="WhatsApp Number"
-                    class="form-input" formControlName="whatsAppNumber">
-                <ng-container *ngIf="isSubmitForm && userForm.controls['whatsAppNumber'].errors">
+            <div
+                [ngClass]="isSubmitForm && userForm.controls['WhatsAppNumber'].dirty ? (userForm.controls['WhatsAppNumber'].errors ? 'has-error' : 'has-success') : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="WhatsAppNumber">{{ "WhatsApp Number" |
+                    translate}}</label>
+                <input id="WhatsAppNumber" name="WhatsAppNumber" type="text" placeholder="WhatsApp Number"
+                    class="form-input" formControlName="WhatsAppNumber">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['WhatsAppNumber'].errors">
                     <p class="mt-1 text-danger">Please enter a number made from 11 digits.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm ? userForm.controls['typeOfCall'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="typeOfCall">Type of Call <span class="font-bold text-red-500">*</span></label>
-                <select id="typeOfCall" name="typeOfCall" class="form-select" formControlName="typeOfCall"
+            <div [ngClass]="isSubmitForm ? userForm.controls['ExtraField1'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="ExtraField1">{{ "Type of Call" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <select id="ExtraField1" name="ExtraField1" class="form-select" formControlName="ExtraField1"
                     aria-label="type of call">
                     <option value="" disabled selected>Type of Call</option>
                     <option value="Outgoing">Outbound Calls</option>
                     <option value="Incoming">Inbound Calls</option>
                 </select>
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['typeOfCall'].errors">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['ExtraField1'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['typeOfCall'].errors">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['ExtraField1'].errors">
                     <p class="mt-1 text-danger">Type of Call is required.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm ? userForm.controls['callStatus'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="callStatus">Call Status <span class="font-bold text-red-500">*</span></label>
-                <select id="callStatus" name="callStatus" class="form-select" formControlName="callStatus"
+            <div [ngClass]="isSubmitForm ? userForm.controls['CallStatus'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="CallStatus">{{ "Call Status" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <select id="CallStatus" name="CallStatus" class="form-select" formControlName="CallStatus"
                     aria-label="call status">
                     <option value="" disabled selected>Call Status</option>
                     <option value="Follow Up">Follow Up</option>
@@ -62,47 +69,49 @@
                     <option value="Connection error">Connection error</option>
                     <option value="No Answer">No Answer</option>
                 </select>
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['callStatus'].errors">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['CallStatus'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['callStatus'].errors">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['CallStatus'].errors">
                     <p class="mt-1 text-danger">Call Status is required.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm ? userForm.controls['followUp'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="followUp">Follow Up <span class="font-bold text-red-500">*</span></label>
-                <select id="followUp" name="followUp" class="form-select" formControlName="followUp"
+            <div [ngClass]="isSubmitForm ? userForm.controls['FollowUp'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="FollowUp">{{ "Follow Up" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <select id="FollowUp" name="FollowUp" class="form-select" formControlName="FollowUp"
                     aria-label="follow up">
                     <option value="" disabled selected>Follow Up</option>
                     <option value="Need Answer">Need Answer</option>
                     <option value="Don't Need Answer">Don't Need Answer</option>
                 </select>
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['followUp'].errors">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['FollowUp'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['followUp'].errors">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['FollowUp'].errors">
                     <p class="mt-1 text-danger">Follow Up is required.</p>
                 </ng-container>
             </div>
-            <div [ngClass]="isSubmitForm ? userForm.controls['callerType'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="callerType">Caller Type <span class="font-bold text-red-500">*</span></label>
-                <select id="callerType" name="callerType" class="form-select" formControlName="callerType"
+            <div [ngClass]="isSubmitForm ? userForm.controls['CallerType'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="CallerType">{{ "Caller Type" | translate}} <span
+                        class="font-bold text-red-500">*</span></label>
+                <select id="CallerType" name="CallerType" class="form-select" formControlName="CallerType"
                     aria-label="caller type">
                     <option value="" disabled selected>Caller Type</option>
                     <option value="Student">Student</option>
                     <option value="Parent">Parent</option>
                     <option value="Others">Others</option>
                 </select>
-                <ng-container *ngIf="isSubmitForm && !userForm.controls['callerType'].errors">
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['CallerType'].errors">
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
-                <ng-container *ngIf="isSubmitForm && userForm.controls['callerType'].errors">
+                <ng-container *ngIf="isSubmitForm && userForm.controls['CallerType'].errors">
                     <p class="mt-1 text-danger">Caller Type is required.</p>
                 </ng-container>
             </div>
             <div>
-                <label for="city">City</label>
-                <select id="city" name="city" class="form-select" formControlName="city" aria-label="city">
+                <label class="text-[#2d3f69] font-extrabold" for="City">{{ "City" | translate}}</label>
+                <select id="City" name="City" class="form-select" formControlName="City" aria-label="City">
                     <option value="" disabled selected>City</option>
                     <option value="Giza ">Giza</option>
                     <option value="Cairo">Cairo</option>
@@ -133,8 +142,9 @@
                 </select>
             </div>
             <div>
-                <label for="school">School</label>
-                <select id="school" name="school" class="form-select" formControlName="school" aria-label="school">
+                <label class="text-[#2d3f69] font-extrabold" for="SchoolName">{{"School" | translate}}</label>
+                <select id="SchoolName" name="SchoolName" class="form-select" formControlName="SchoolName"
+                    aria-label="school">
                     <option value="" disabled selected>School</option>
                     <option value="Medicine">Medicine</option>
                     <option value="Computing and Data Science">Computing and Data Science</option>
@@ -150,14 +160,15 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-                <label for="percentage">Percentage</label>
-                <input id="percentage" name="percentage" type="text" placeholder="Percentage" class="form-input"
-                    formControlName="percentage">
+                <label class="text-[#2d3f69] font-extrabold" for="Percentage">{{"Percentage" | translate}}</label>
+                <input id="Percentage" name="Percentage" type="text" placeholder="Percentage" class="form-input"
+                    formControlName="Percentage">
             </div>
             <div>
-                <label for="certificateType">Certificate Type</label>
-                <select id="certificateType" name="certificateType" class="form-select"
-                    formControlName="certificateType" aria-label="certificate type">
+                <label class="text-[#2d3f69] font-extrabold" for="CertificateType">{{ "Certificate Type" |
+                    translate}}</label>
+                <select id="CertificateType" name="CertificateType" class="form-select"
+                    formControlName="CertificateType" aria-label="certificate type">
                     <option value="" disabled selected>Certificate Type</option>
                     <option value="Thanawya Amma (Scientific Science)">Thanawya Amma (Scientific Science)</option>
                     <option value="Thanawya Amma (Mathematics Science)">Thanawya Amma (Mathematics Science)</option>
@@ -172,10 +183,10 @@
                     <option value="Others">Others</option>
                 </select>
             </div>
-            <div
+            <!-- <div
                 [ngClass]="isSubmitForm ? userForm.controls['askedQuestions'].errors ? 'has-error' : 'has-success' : ''">
-                <label for="askedQuestions">Asked Questions <span class="font-bold text-red-500">*</span></label>
-                <ng-select [items]="options" id="input6" formControlName="askedQuestions" [multiple]="true"
+                <label class="text-[#2d3f69] font-extrabold" for="askedQuestions">Asked Questions <span class="font-bold text-red-500">*</span></label>
+                <ng-select [items]="options" id="ExtraField3" formControlName="ExtraField3" [multiple]="true"
                     [clearable]="false" placeholder="Select an option" class="custom-multiselect">
                 </ng-select>
                 <ng-container *ngIf="isSubmitForm && !userForm.controls['askedQuestions'].errors">
@@ -184,25 +195,42 @@
                 <ng-container *ngIf="isSubmitForm && userForm.controls['askedQuestions'].errors">
                     <p class="mt-1 text-danger">Asked Questions is required.</p>
                 </ng-container>
+            </div> -->
+            <div [ngClass]="isSubmitForm ? userForm.controls['ExtraField3'].errors ? 'has-error' : 'has-success' : ''">
+                <label class="text-[#2d3f69] font-extrabold" for="ExtraField3">{{ "Asked Questions" | translate }} <span
+                        class="font-bold text-red-500">*</span></label>
+                <select id="ExtraField3" name="ExtraField3" class="form-select" formControlName="ExtraField3"
+                    aria-label="Asked Questions">
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="Need Answer">Need Answer</option>
+                    <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+                </select>
+                <ng-container *ngIf="isSubmitForm && !userForm.controls['ExtraField3'].errors">
+                    <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
+                </ng-container>
+                <ng-container *ngIf="isSubmitForm && userForm.controls['ExtraField3'].errors">
+                    <p class="mt-1 text-danger">Asked Questions is required.</p>
+                </ng-container>
             </div>
         </div>
-        <div [ngClass]="isSubmitForm ? userForm.controls['answer'].errors ? 'has-error' : 'has-success' : ''">
-            <label for="answer">Answer <span class="font-bold text-red-500">*</span></label>
-            <textarea id="answer" name="answer" placeholder="Answer" rows="5" class="form-input"
-                formControlName="answer"></textarea>
-            <ng-container *ngIf="isSubmitForm && !userForm.controls['answer'].errors">
+        <div [ngClass]="isSubmitForm ? userForm.controls['Answer'].errors ? 'has-error' : 'has-success' : ''">
+            <label class="text-[#2d3f69] font-extrabold" for="Answer">{{ "Answer" | translate}} <span
+                    class="font-bold text-red-500">*</span></label>
+            <textarea id="Answer" name="Answer" placeholder="Answer" rows="5" class="form-input"
+                formControlName="Answer"></textarea>
+            <ng-container *ngIf="isSubmitForm && !userForm.controls['Answer'].errors">
                 <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
             </ng-container>
-            <ng-container *ngIf="isSubmitForm && userForm.controls['answer'].errors">
+            <ng-container *ngIf="isSubmitForm && userForm.controls['Answer'].errors">
                 <p class="mt-1 text-danger">Answer is required.</p>
             </ng-container>
         </div>
         <div>
-            <label for="notes">Notes</label>
+            <label class="text-[#2d3f69] font-extrabold" for="notes">{{ "Notes" | translate}}</label>
             <textarea id="notes" name="notes" placeholder="Notes" rows="5" class="form-input"
                 formControlName="notes"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary ms-auto !mt-6">Save</button>
+        <button type="submit" class="btn btn-primary ms-auto !mt-6 hover:opacity-80">Save</button>
     </form>
 
     <app-history-tabs></app-history-tabs>

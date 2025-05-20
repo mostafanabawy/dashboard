@@ -31,6 +31,7 @@ export class SidebarComponent {
 
     ngOnInit() {
         this.setActiveDropdown();
+        console.log(this.store);
     }
 
     setActiveDropdown() {

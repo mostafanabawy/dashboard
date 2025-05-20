@@ -31,6 +31,7 @@
         "@ngrx/store": "^18.0.2",
         "@ngx-translate/core": "^15.0.0",
         "@ngx-translate/http-loader": "^8.0.0",
+        "alasql": "^4.6.6",
         "angularx-flatpickr": "^7.3.0",
         "apexcharts": "^3.49.2",
         "file-saver": "^2.0.5",
@@ -54,6 +55,7 @@
         "sweetalert2": "^11.7.3",
         "swiper": "^11.1.9",
         "tslib": "^2.5.2",
+        "xlsx": "^0.18.5",
         "zone.js": "~0.14.4"
     },
     "devDependencies": {

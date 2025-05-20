@@ -1,0 +1,106 @@
+<div>
+
+    <div class="panel mt-6 pb-0">
+        <div class="datatable">
+            <ng-datatable [rows]="rows()" [columns]="cols" [columnFilter]="true" skin="whitespace-wrap table-hover"
+                [isServerMode]="true"
+                [totalRows]="totalRows()"
+                [loading]="rows().length ? false : true"
+                [page]="currentPage()"
+                paginationInfo="{0} to {1} of {2}"
+                (changeServer)="onServerChange($event)"
+                firstArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M13 19L7 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M16.9998 19L10.9998 12L16.9998 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                lastArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M11 19L17 12L11 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path opacity="0.5" d="M6.99976 19L12.9998 12L6.99976 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg> '
+                previousArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M15 5L9 12L15 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'
+                nextArrow='<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 rtl:rotate-180"> <path d="M9 5L15 12L9 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </svg>'>
+
+                <ng-template slot="action" let-value="data">
+                    <div class="flex items-center justify-end">
+                        <!-- login -->
+                        <div>
+                            <!-- Trigger -->
+                            <button type="button" class="ltr:mr-2 rtl:ml-2" ngxTippy="Edit"
+                                (click)="editRow(value); modal20.open()">
+                                <icon-pencil />
+                            </button>
+
+                            <!-- Modal -->
+                            <ngx-custom-modal #modal20 customClass="modal-top auth-modal extra-large-modal">
+                                <ng-template #modalHeader>
+                                    <div class="!py-5">Edit Question</div>
+                                </ng-template>
+                                <ng-template #modalBody>
+                                    <form (ngSubmit)="onSubmit()" [formGroup]='singleRowForm'>
+                                        <div class="relative mb-4">
+                                            <label for="questionId"></label>
+                                            <textarea id="questionId" type="text" class="form-input hidden"
+                                                formControlName="questionId"></textarea>
+                                        </div>
+                                        <div class="relative mb-4">
+                                            <textarea id="question" type="text" placeholder="Question"
+                                                class="form-input" formControlName="question"></textarea>
+                                        </div>
+                                        <div class="relative mb-4">
+                                            <textarea id="answer" type="text" placeholder="Answer" class="form-input"
+                                                formControlName="answer"></textarea>
+                                        </div>
+                                        <div class="relative mb-4">
+                                            <textarea id="notes" type="text" placeholder="Notes" class="form-input"
+                                                formControlName="notes"></textarea>
+                                        </div>
+                                        <div class="flex items-center justify-end">
+                                            <button class="btn btn-primary mx-3">Save</button>
+                                            <button type="button" (click)="modal20.close()"
+                                                class="btn btn-outline-danger">Cancel</button>
+                                        </div>
+                                    </form>
+                                </ng-template>
+                            </ngx-custom-modal>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-datatable>
+        </div>
+    </div>
+    <!-- <div>
+        <button type="button" class="ltr:mr-2 rtl:ml-2" ngxTippy="Edit"
+            (click)="modal20.open()">
+            <icon-pencil />
+        </button>
+    </div> -->
+    <!-- Modal -->
+    <!--   <ngx-custom-modal #modal20 customClass="modal-top auth-modal extra-large-modal">
+        <ng-template #modalHeader>
+            <div class="!py-5">Edit Question</div>
+        </ng-template>
+        <ng-template #modalBody>
+            <form (ngSubmit)="onSubmit()" [formGroup]='singleRowForm'>
+                <div class="relative mb-4">
+                    <label for="questionId"></label>
+                    <textarea id="questionId" type="text" class="form-input"
+                        formControlName="questionId"></textarea>
+                </div>
+                <div class="relative mb-4">
+                    <textarea id="question" type="text" placeholder="Question"
+                        class="form-input"
+                        formControlName="question"></textarea>
+                </div>
+                <div class="relative mb-4">
+                    <textarea id="answer" type="text" placeholder="Answer"
+                        class="form-input"
+                        formControlName="answer"></textarea>
+                </div>
+                <div class="relative mb-4">
+                    <textarea id="notes" type="text" placeholder="Notes"
+                        class="form-input"
+                        formControlName="notes"></textarea>
+                </div>
+                <ng-template #modalFooter>
+                    <button class="btn btn-primary mx-3">Save</button>
+                    <button type="button" (click)="modal20.close()"
+                        class="btn btn-outline-danger">Cancel</button>
+                </ng-template>
+            </form>
+        </ng-template>
+    </ngx-custom-modal> -->
+</div>

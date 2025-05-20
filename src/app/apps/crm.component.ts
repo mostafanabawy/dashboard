@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { HistoryService } from '../service/history.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-crm',
@@ -22,24 +24,38 @@ export class CRMComponent {
     'Suppliers',
     'Others'
   ];
-  constructor(public fb: FormBuilder) {
+  store: any;
+  constructor(
+    private fb: FormBuilder,
+    private historyTabsService: HistoryService,
+    private storeData: Store<any>
+  ) {
+    this.initStore();
     this.initForm();
+  }
+  async initStore() {
+    this.storeData
+      .select((d) => d.index)
+      .subscribe((d) => {
+        this.store = d;
+      });
   }
   initForm() {
     this.userForm = this.fb.group({
-      name: ['', Validators.required],
-      phoneNumber: ['', [Validators.required, Validators.pattern(/[0-9]{11}/)]],
-      whatsAppNumber: ['', Validators.pattern(/[0-9]{11}/)],
-      typeOfCall: ['', Validators.required],
-      callStatus: ['', Validators.required],
-      followUp: ['', Validators.required],
-      callerType: ['', Validators.required],
-      city: [''],
-      school: [''],
-      percentage: [''],
-      certificateType: [''],
-      askedQuestions: [[], Validators.required],
-      answer: ['', Validators.required],
+      Answer: ['', Validators.required],
+      CallStatus: ['', Validators.required],
+      CallerName: ['', Validators.required],
+      CallerType: ['', Validators.required],
+      CertificateType: [''],
+      City: [''],
+      ExtraField1: ['', Validators.required],
+      ExtraField3: ['', Validators.required],
+      ExtraFiled2: [''], // Note: spelling as per your list
+      FollowUp: ['', Validators.required],
+      Percentage: [''],
+      PhoneNumber: ['', [Validators.required, Validators.pattern(/[0-9]{11}/)]],
+      SchoolName: [''],
+      WhatsAppNumber: ['', Validators.pattern(/[0-9]{11}/)],
       notes: [''],
     });
   }
@@ -49,7 +65,18 @@ export class CRMComponent {
     this.isSubmitForm = true;
     if (this.userForm.valid) {
       //form validated success
-      this.showMessage('Form submitted successfully.');
+      try {
+        this.historyTabsService.sendFormMainData(this.userForm.value).subscribe((res: any) => {
+          console.log(res);
+          this.userForm.reset();
+          this.isSubmitForm = false;
+          this.userForm.markAsPristine();
+          this.showMessage('Form submitted successfully.');
+        });
+      } catch (error) {
+        console.error('Error:', error);
+        this.showMessage('Error occurred while submitting the form.', 'error');
+      }
     } else {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }

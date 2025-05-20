@@ -100,7 +100,7 @@
     }
     .sidebar .nav-item > button.active,
     .sidebar .nav-item > a.active {
-        @apply bg-[#000]/[0.08] text-black dark:bg-[#181f32] dark:text-white-dark;
+        @apply bg-[#000]/[0.08] text-white dark:bg-[#181f32] dark:text-white-dark;
     }
 
     .sidebar .nav-item > button.active > div > span,
@@ -281,7 +281,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     }
 
     .btn-primary {
-        @apply border-primary bg-primary text-white shadow-primary/60;
+        @apply border-primary bg-secondary text-white shadow-primary/60;
     }
     .btn-outline-primary {
         @apply border-primary text-primary shadow-none hover:bg-primary hover:text-white;
