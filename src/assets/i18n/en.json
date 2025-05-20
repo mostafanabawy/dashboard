@@ -148,5 +148,18 @@
         "Answer": "Answer",
         "Notes": "Notes",
         "Action": "Action"
+    },
+    "formErrors": {
+        "required": "{{field}} is required."
+    },
+    "fieldNames": {
+        "name": "Name",
+        "phone": "Phone number",
+        "followUp": "Follow Up",
+        "callStatus": "Call Status",
+        "typeOfCall": "Type of Call",
+        "callerType": "Caller Type",
+        "askedQuestions": "Asked Questions",
+        "answer": "Answer"
     }
 }

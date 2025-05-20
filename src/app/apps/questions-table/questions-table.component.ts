@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, effect, OnChanges, signal, SimpleChanges } from '@angular/core';
+import { Component, effect, OnChanges, signal, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { HistoryService } from 'src/app/service/history.service';
@@ -11,8 +11,7 @@ export class QuestionsTableComponent {
   constructor(
     private tabsHisoryService: HistoryService,
     private fb: FormBuilder,
-    private translate: TranslateService,
-    private cdr: ChangeDetectorRef
+    private translate: TranslateService
   ) {
     this.initForm();
     effect(() => {
@@ -27,15 +26,13 @@ export class QuestionsTableComponent {
       this.rows.set(res.result.items)
       this.totalRows.set(res.result.PagingInfo[0].TotalRows);
       this.currentPage.set(res.result.PagingInfo[0].CurrentPage);
+      this.loading = false;
       console.log(res);
     });
     this.translateCols();
-    this.translate.onLangChange.subscribe(event => {
-      console.log('Language changed to:', event.lang);
-      this.translateCols();
-    });
   }
-  search = '';
+  search1 = '';
+  loading = true;
   cols = [
     { field: 'Question', title: 'Question' },
     { field: 'AnswerEN', title: 'Answer' },
@@ -55,7 +52,6 @@ export class QuestionsTableComponent {
         { field: 'AnswerAR', title: translations['table2.Notes'] },
         { field: 'action', title: translations['table2.Action'], filter: false, headerClass: 'justify-center' }
       ];
-      this.cdr.detectChanges();
     });
   }
 
@@ -90,11 +86,37 @@ export class QuestionsTableComponent {
     });
   }
   onServerChange(data: any) {
-    console.log(data);
-    this.currentPage.set(data.current_page)
-    this.tabsHisoryService.fetchQuestions(data.current_page).subscribe((res: any) => {
-      this.rows.set(res.result.items)
-      console.log(res);
-    });
+    switch (data.change_type) {
+      case 'page':
+        this.currentPage.set(data.current_page)
+        this.tabsHisoryService.fetchQuestions(data.current_page).subscribe((res: any) => {
+          this.rows.set(res.result.items)
+          this.loading = false
+          console.log(res);
+        });
+        break;
+      /* case 'search':
+        console.log(data);
+        this.tabsHisoryService.fetchQuestions(this.currentPage(), { Question: this.search }).subscribe((res: any) => {
+          this.rows.set(res.result.items);
+          console.log(res);
+        });
+        break; */
+    }
+  }
+  onSearch(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.loading = true;
+      this.tabsHisoryService.fetchQuestions(this.currentPage(), { Question: this.search1 }).subscribe((res: any) => {
+        this.rows.set(res.result.items);
+        if (res.result.items.length > 0) {
+          this.totalRows.set(res.result.PagingInfo[0].TotalRows + 1);
+        }else{
+          this.totalRows.set(res.result.PagingInfo[0].TotalRows);
+        }
+        this.loading = false
+        console.log(res);
+      });
+    }
   }
 }

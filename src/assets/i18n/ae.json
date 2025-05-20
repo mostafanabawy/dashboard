@@ -168,5 +168,18 @@
     "History": "إدخالات سابقة",
     "All Questions": "جميع الأسئلة",
     "All History": "جميع الإدخالات السابقة",
-    "action": "إجراء"
+    "action": "إجراء",
+    "formErrors": {
+        "required": "برجاء إدخال  {{field}}"
+    },
+    "fieldNames": {
+        "name": "الاسم",
+        "phone": "رقم الهاتف",
+        "followUp": "المتابعة",
+        "callStatus": "حالة المكالمة",
+        "typeOfCall": "نوع المكالمة",
+        "callerType": "نوع المتصل",
+        "askedQuestions": "الأسئلة المطروحة",
+        "answer": "الإجابة"
+    }
 }

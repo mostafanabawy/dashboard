@@ -11,7 +11,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['CallerName'].errors">
-                    <p class="mt-1 text-danger">Name is required.</p>
+                    <p class="mt-1 text-danger">{{ getErrorMessage("name", "required") }}</p>
                 </ng-container>
             </div>
             <div [ngClass]="isSubmitForm ? userForm.controls['PhoneNumber'].errors ? 'has-error' : 'has-success' : ''">
@@ -23,8 +23,9 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['PhoneNumber'].errors">
-                    <p class="mt-1 text-danger" *ngIf="userForm.controls['PhoneNumber'].errors?.['required']">Phone
-                        number is required.</p>
+                    <p class="mt-1 text-danger" *ngIf="userForm.controls['PhoneNumber'].errors?.['required']">
+                        {{ getErrorMessage("phone", "required") }}
+                    </p>
                     <p class="mt-1 text-danger" *ngIf="userForm.controls['PhoneNumber'].errors?.['pattern']">please
                         enter a number made from 11 digits.</p>
                 </ng-container>
@@ -52,7 +53,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['ExtraField1'].errors">
-                    <p class="mt-1 text-danger">Type of Call is required.</p>
+                    <p class="mt-1 text-danger"> {{ getErrorMessage("typeOfCall", "required")}}</p>
                 </ng-container>
             </div>
             <div [ngClass]="isSubmitForm ? userForm.controls['CallStatus'].errors ? 'has-error' : 'has-success' : ''">
@@ -73,7 +74,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['CallStatus'].errors">
-                    <p class="mt-1 text-danger">Call Status is required.</p>
+                    <p class="mt-1 text-danger"> {{ getErrorMessage("callStatus", "required")}}</p>
                 </ng-container>
             </div>
             <div [ngClass]="isSubmitForm ? userForm.controls['FollowUp'].errors ? 'has-error' : 'has-success' : ''">
@@ -89,7 +90,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['FollowUp'].errors">
-                    <p class="mt-1 text-danger">Follow Up is required.</p>
+                    <p class="mt-1 text-danger"> {{ getErrorMessage("followUp", "required")}}</p>
                 </ng-container>
             </div>
             <div [ngClass]="isSubmitForm ? userForm.controls['CallerType'].errors ? 'has-error' : 'has-success' : ''">
@@ -106,7 +107,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['CallerType'].errors">
-                    <p class="mt-1 text-danger">Caller Type is required.</p>
+                    <p class="mt-1 text-danger"> {{ getErrorMessage("callerType", "required")}}</p>
                 </ng-container>
             </div>
             <div>
@@ -209,7 +210,7 @@
                     <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
                 </ng-container>
                 <ng-container *ngIf="isSubmitForm && userForm.controls['ExtraField3'].errors">
-                    <p class="mt-1 text-danger">Asked Questions is required.</p>
+                    <p class="mt-1 text-danger">{{ getErrorMessage("askedQuestions", "required") }}</p>
                 </ng-container>
             </div>
         </div>
@@ -222,7 +223,7 @@
                 <p class="mt-1 text-[#1abc9c]">Looks Good!</p>
             </ng-container>
             <ng-container *ngIf="isSubmitForm && userForm.controls['Answer'].errors">
-                <p class="mt-1 text-danger">Answer is required.</p>
+                <p class="mt-1 text-danger">{{ getErrorMessage("answer", "required") }}</p>
             </ng-container>
         </div>
         <div>

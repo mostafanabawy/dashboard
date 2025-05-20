@@ -8,16 +8,16 @@ export class HistoryService {
   constructor(
     private http: HttpClient
   ) { }
-  fetchQuestions(pageNo: number) {
+  fetchQuestions(pageNo: number, search: {} = {}) {
     const params = new HttpParams()
       .set('action', 'getpagewithsearch')
       .set('pageno', `${pageNo}`)
-      .set('pagesize', '10')
+      .set('pagesize', '20')
       .set('sortfield', 'ID')
       .set('sortdirection', '1');
     return this.http.post(
       'http://208.109.190.145:8085/CRUDGenericHandler/BUBadyaUniversityQuestionsCRUD.ashx',
-      {},         // empty POST body
+      search,         // empty POST body
       { params }  // query string parameters
     );
   }

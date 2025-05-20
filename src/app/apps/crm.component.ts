@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { HistoryService } from '../service/history.service';
 import { Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-crm',
@@ -28,7 +29,8 @@ export class CRMComponent {
   constructor(
     private fb: FormBuilder,
     private historyTabsService: HistoryService,
-    private storeData: Store<any>
+    private storeData: Store<any>,
+    private translate: TranslateService
   ) {
     this.initStore();
     this.initForm();
@@ -96,4 +98,8 @@ export class CRMComponent {
     });
   }
 
+  getErrorMessage(controlName: string, errorKey: string) {
+    const field = this.translate.instant(`fieldNames.${controlName}`);
+    return this.translate.instant(`formErrors.${errorKey}`, { field });
+  }
 }
