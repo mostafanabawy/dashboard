@@ -17,8 +17,10 @@ export class HistoryTablesComponent implements OnInit {
     this.initForm();
   }
   ngOnInit() {
-    this.tabsHisoryService.fetchHistory({}).subscribe((res: any) => {
-      this.rows.set(res.result.items)
+    this.tabsHisoryService.fetchHistory(this.currentPage(), this.searchForm.value).subscribe((res: any) => {
+      this.rows.set(res.result.items);
+      this.totalRows.set(res.result.PagingInfo[0].TotalRows);
+      this.loading = false;
       console.log(res);
     });
     (window as any).XLSX = XLSX;
@@ -65,51 +67,50 @@ export class HistoryTablesComponent implements OnInit {
   }
 
   rows = signal<any>([])
-  singleRowForm!: FormGroup;
-  currentPage!: number;
-  totalPages!: number;
+  searchForm!: FormGroup;
+  currentPage = signal<number>(1);
+  pageSize = signal<number>(10);
+  totalRows = signal<number>(0);
+  loading = true;
   initForm() {
-    this.singleRowForm = this.fb.group({
-      questionId: [''],
-      question: [''],
-      answer: [''],
-      notes: ['']
+    this.searchForm = this.fb.group({
+      searchText: [''],
+      searchBy: ['']
     });
   }
 
-
-  editRow(row: any) {
-    console.log(row);
-    this.singleRowForm.patchValue({
-      questionId: row.ID,
-      question: row.Question,
-      answer: row.AnswerEN,
-      notes: row.AnswerAR
+  onSearch() {
+    this.loading = true;
+    this.currentPage.set(1);
+    this.tabsHisoryService.fetchHistory(this.currentPage(), this.searchForm.value).subscribe((res: any) => {
+      this.rows.set(res.result.items);
+      this.totalRows.set(res.result.PagingInfo[0].TotalRows);
+      this.loading = false;
+      console.log(res);
     });
-  }
-  onSubmit() {
-    console.log(this.singleRowForm.value);
-  }
-
-  onSearch(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.tabsHisoryService.fetchHistory({ CallStatus: this.search1, CallerName: this.search1 }).subscribe((res: any) => {
-        this.rows.set(res.result.items);
-        console.log(res);
-      });
-    }
   }
   exportData() {
     alasql('SELECT * INTO XLSX("History.xlsx",{headers:true}) FROM ?', [this.rows()]);
 
   }
-  /* onPageChange(page: number) {
-    this.currentPage = page;
-
-    // If we've reached the last page with current data
-    const maxPage = Math.ceil(this.totalRowsInFrontend / this.pageSize);
-    if (page >= maxPage) {
-      this.fetchMoreDataFromBackend();
+  onServerChange(data: any) {
+    console.log(data);
+    switch (data.change_type) {
+      case 'page':
+        this.currentPage.set(data.current_page)
+        this.tabsHisoryService.fetchHistory(data.current_page, this.searchForm.value).subscribe((res: any) => {
+          this.rows.set(res.result.items)
+          this.loading = false
+          console.log(res);
+        });
+        break;
+      case 'sort':
+        this.tabsHisoryService.fetchHistory(data.current_page, this.searchForm.value, data.sort_direction === "asc"? 1 : 2, data.sort_column ).subscribe((res: any) => {
+          this.rows.set(res.result.items)
+          this.loading = false
+          console.log(res);
+        });
+        break;
     }
-  } */
+  }
 }

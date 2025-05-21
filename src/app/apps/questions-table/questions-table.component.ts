@@ -22,7 +22,7 @@ export class QuestionsTableComponent {
 
 
   ngOnInit() {
-    this.tabsHisoryService.fetchQuestions(1).subscribe((res: any) => {
+    this.tabsHisoryService.fetchQuestions(1, this.searchForm.value).subscribe((res: any) => {
       this.rows.set(res.result.items)
       this.totalRows.set(res.result.PagingInfo[0].TotalRows);
       this.currentPage.set(res.result.PagingInfo[0].CurrentPage);
@@ -31,7 +31,6 @@ export class QuestionsTableComponent {
     });
     this.translateCols();
   }
-  search1 = '';
   loading = true;
   cols = [
     { field: 'Question', title: 'Question' },
@@ -57,6 +56,7 @@ export class QuestionsTableComponent {
 
   rows = signal<any>([])
   singleRowForm!: FormGroup;
+  searchForm!: FormGroup;
   currentPage = signal<number>(1);
   pageSize = signal<number>(10);
   totalRows = signal<number>(0);
@@ -66,6 +66,10 @@ export class QuestionsTableComponent {
       question: [''],
       answer: [''],
       notes: ['']
+    });
+    this.searchForm = this.fb.group({
+      searchText: [''],
+      searchBy: ['']
     });
   }
 
@@ -85,38 +89,30 @@ export class QuestionsTableComponent {
       console.log(res);
     });
   }
-  onServerChange(data: any) {
-    switch (data.change_type) {
-      case 'page':
-        this.currentPage.set(data.current_page)
-        this.tabsHisoryService.fetchQuestions(data.current_page).subscribe((res: any) => {
-          this.rows.set(res.result.items)
-          this.loading = false
-          console.log(res);
-        });
-        break;
-      /* case 'search':
-        console.log(data);
-        this.tabsHisoryService.fetchQuestions(this.currentPage(), { Question: this.search }).subscribe((res: any) => {
-          this.rows.set(res.result.items);
-          console.log(res);
-        });
-        break; */
-    }
-  }
-  onSearch(event: KeyboardEvent) {
-    if (event.key === 'Enter') {
-      this.loading = true;
-      this.tabsHisoryService.fetchQuestions(this.currentPage(), { Question: this.search1 }).subscribe((res: any) => {
-        this.rows.set(res.result.items);
-        if (res.result.items.length > 0) {
-          this.totalRows.set(res.result.PagingInfo[0].TotalRows + 1);
-        }else{
-          this.totalRows.set(res.result.PagingInfo[0].TotalRows);
-        }
-        this.loading = false
-        console.log(res);
-      });
-    }
+  /*  onServerChange(data: any) {
+     switch (data.change_type) {
+       case 'page':
+         this.currentPage.set(data.current_page)
+         this.tabsHisoryService.fetchQuestions(data.current_page).subscribe((res: any) => {
+           this.rows.set(res.result.items)
+           this.loading = false
+           console.log(res);
+         });
+         break;
+     }
+   } */
+  onSearchSubmit() {
+    this.loading = true;
+    this.currentPage.set(1);
+    this.tabsHisoryService.fetchQuestions(this.currentPage(), this.searchForm.value).subscribe((res: any) => {
+      this.rows.set(res.result.items);
+      if (res.result.items.length > 0) {
+        this.totalRows.set(res.result.PagingInfo[0].TotalRows + 1);
+      } else {
+        this.totalRows.set(res.result.PagingInfo[0].TotalRows);
+      }
+      this.loading = false
+      console.log(res);
+    });
   }
 }

@@ -8,29 +8,44 @@ export class HistoryService {
   constructor(
     private http: HttpClient
   ) { }
-  fetchQuestions(pageNo: number, search: {} = {}) {
+  fetchQuestions(pageNo: number, formData: { searchText: string, searchBy: string }) {
+    console.log(formData);
+    let query: any = {};
+    if (formData.searchBy && formData.searchText) {
+      query[formData.searchBy] = formData.searchText;
+    } else if (formData.searchText) {
+      query = { Question: formData.searchText };
+    }
+
+    console.log(query);
+
     const params = new HttpParams()
       .set('action', 'getpagewithsearch')
       .set('pageno', `${pageNo}`)
-      .set('pagesize', '20')
+      .set('pagesize', '1000')
       .set('sortfield', 'ID')
       .set('sortdirection', '1');
     return this.http.post(
       'http://208.109.190.145:8085/CRUDGenericHandler/BUBadyaUniversityQuestionsCRUD.ashx',
-      search,         // empty POST body
+      query,         // empty POST body
       { params }  // query string parameters
     );
   }
-  fetchHistory(payload: any) {
-    /* http://208.109.190.145:8085/CRUDGenericHandler/BUBadyaUniversityCRUD.ashx?action=getpagewithsearch&pageno=1&pagesize=1000&sortfield=RecordId&sortdirection=1 */
+  fetchHistory(pageNumber: number, payload: { searchText: string, searchBy: string }, sort: number = 1, sortField: string = 'RecordId') {
+    let query: any = {};
+    if (payload.searchBy && payload.searchText) {
+      query[payload.searchBy] = payload.searchText;
+    } else if (payload.searchText) {
+      query = { CallStatus: payload.searchText, CallerName: payload.searchText };
+    }
     const params = new HttpParams()
       .set('action', 'getpagewithsearch')
-      .set('pageno', '1')
-      .set('pagesize', '1000')
-      .set('sortfield', 'RecordId')
-      .set('sortdirection', '1');
+      .set('pageno', `${pageNumber}`)
+      .set('pagesize', '50')
+      .set('sortfield', `${sortField}`)
+      .set('sortdirection', `${sort}`);
     return this.http.post('http://208.109.190.145:8085/CRUDGenericHandler/BUBadyaUniversityCRUD.ashx',
-      payload,         // empty POST body
+      query,         // empty POST body
       { params }  // query string parameters
     )
   }

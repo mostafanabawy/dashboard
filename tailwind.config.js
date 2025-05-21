@@ -18,12 +18,12 @@ module.exports = {
             colors: {
                 primary: {
                     DEFAULT: '#cfb895',
-                    light: '#eaf1ff',
+                    light: '#cfb895',
                     'dark-light': 'rgba(67,97,238,.15)',
                 },
                 secondary: {
                     DEFAULT: '#4361ee',
-                    light: '#ebe4f7',
+                    light: '#4361ee',
                     'dark-light': 'rgb(128 93 202 / 15%)',
                 },
                 success: {
